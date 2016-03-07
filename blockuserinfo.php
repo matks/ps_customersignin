@@ -29,19 +29,19 @@ use PrestaShop\PrestaShop\Core\Module\WidgetInterface;
 if (!defined('_PS_VERSION_'))
 	exit;
 
-class BlockUserInfo extends Module implements WidgetInterface
+class Ps_CustomerSignIn extends Module implements WidgetInterface
 {
 	public function __construct()
 	{
-		$this->name = 'blockuserinfo';
+		$this->name = 'ps_customersignin';
 		$this->tab = 'front_office_features';
-		$this->version = '2.0.0';
+		$this->version = '1.0.0';
 		$this->author = 'PrestaShop';
 		$this->need_instance = 0;
 
 		parent::__construct();
 
-		$this->displayName = $this->l('User info block');
+		$this->displayName = $this->l('Customer "Sign in" link');
 		$this->description = $this->l('Adds a block that displays information about the customer.');
 		$this->ps_versions_compliancy = array('min' => '1.7', 'max' => _PS_VERSION_);
 	}
@@ -75,6 +75,6 @@ class BlockUserInfo extends Module implements WidgetInterface
 	public function renderWidget($hookName, array $configuration)
 	{
 		$this->smarty->assign($this->getWidgetVariables($hookName, $configuration));
-		return $this->display(__FILE__, 'blockuserinfo.tpl');
+		return $this->display(__FILE__, 'ps_customersignin.tpl');
 	}
 }

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <module>
-	<name>blockuserinfo</name>
-	<displayName><![CDATA[User info block]]></displayName>
-	<version><![CDATA[0.4.0]]></version>
+	<name>ps_customersignin</name>
+	<displayName><![CDATA[Customer "Sign in" link]]></displayName>
+	<version><![CDATA[1.0.0]]></version>
 	<description><![CDATA[Adds a block that displays information about the customer.]]></description>
 	<author><![CDATA[PrestaShop]]></author>
 	<tab><![CDATA[front_office_features]]></tab>
