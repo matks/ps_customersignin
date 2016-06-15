@@ -26,55 +26,60 @@
 
 use PrestaShop\PrestaShop\Core\Module\WidgetInterface;
 
-if (!defined('_PS_VERSION_'))
-	exit;
+if (!defined('_PS_VERSION_')) {
+    exit;
+}
 
 class Ps_CustomerSignIn extends Module implements WidgetInterface
 {
-	public function __construct()
-	{
-		$this->name = 'ps_customersignin';
-		$this->tab = 'front_office_features';
-		$this->version = '1.0.0';
-		$this->author = 'PrestaShop';
-		$this->need_instance = 0;
+    public function __construct()
+    {
+        $this->name = 'ps_customersignin';
+        $this->tab = 'front_office_features';
+        $this->version = '1.0.0';
+        $this->author = 'PrestaShop';
+        $this->need_instance = 0;
 
-		parent::__construct();
+        parent::__construct();
 
-		$this->displayName = $this->l('Customer "Sign in" link');
-		$this->description = $this->l('Adds a block that displays information about the customer.');
-		$this->ps_versions_compliancy = array('min' => '1.7', 'max' => _PS_VERSION_);
-	}
+        $this->displayName = $this->getTranslator()->trans('Customer "Sign in" link', array(), 'Modules.CustomerSignIn');
+        $this->description = $this->getTranslator()->trans('Adds a block that displays information about the customer.', array(), 'Modules.CustomerSignIn');
+        $this->ps_versions_compliancy = array('min' => '1.7', 'max' => _PS_VERSION_);
+    }
 
-	public function getWidgetVariables($hookName, array $configuration)
-	{
-		if (!$this->active)
-			return;
+    public function getWidgetVariables($hookName, array $configuration)
+    {
+        if (!$this->active) {
+            return;
+        }
 
-		$logged = $this->context->customer->isLogged();
-		$customerName = '';
-		if ($logged) {
-			$customerName = sprintf(
-				$this->l('%1$s %2$s'),
-				$this->context->customer->firstname,
-				$this->context->customer->lastname
-			);
-		}
+        $logged = $this->context->customer->isLogged();
+        $customerName = '';
+        if ($logged) {
+            $customerName = $this->getTranslator()->trans(
+                '%firstname% %lastname%',
+                array(
+                    '%firstname%' => $this->context->customer->firstname,
+                    '%lastname%' => $this->context->customer->lastname,
+                ),
+                'Modules.CustomerSignIn'
+            );
+        }
 
-		$link = $this->context->link;
+        $link = $this->context->link;
 
-		return [
-			'logged' 			=> $logged,
-			'customerName' 		=> $customerName,
-			'logout_url'		=> $link->getPageLink('index', true, NULL, 'mylogout'),
-			'my_account_url'	=> $link->getPageLink('my-account', true),
+        return [
+            'logged'            => $logged,
+            'customerName'        => $customerName,
+            'logout_url'        => $link->getPageLink('index', true, null, 'mylogout'),
+            'my_account_url'    => $link->getPageLink('my-account', true),
 
-		];
-	}
+        ];
+    }
 
-	public function renderWidget($hookName, array $configuration)
-	{
-		$this->smarty->assign($this->getWidgetVariables($hookName, $configuration));
-		return $this->display(__FILE__, 'ps_customersignin.tpl');
-	}
+    public function renderWidget($hookName, array $configuration)
+    {
+        $this->smarty->assign($this->getWidgetVariables($hookName, $configuration));
+        return $this->display(__FILE__, 'ps_customersignin.tpl');
+    }
 }
