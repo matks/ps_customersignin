@@ -44,7 +44,7 @@ class Ps_CustomerSignIn extends Module implements WidgetInterface
 
         $this->displayName = $this->getTranslator()->trans('Customer "Sign in" link', array(), 'Modules.CustomerSignIn');
         $this->description = $this->getTranslator()->trans('Adds a block that displays information about the customer.', array(), 'Modules.CustomerSignIn');
-        $this->ps_versions_compliancy = array('min' => '1.7', 'max' => _PS_VERSION_);
+        $this->ps_versions_compliancy = array('min' => '1.7.0.0', 'max' => _PS_VERSION_);
     }
 
     public function getWidgetVariables($hookName, array $configuration)
