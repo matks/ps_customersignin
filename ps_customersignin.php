@@ -69,10 +69,10 @@ class Ps_CustomerSignIn extends Module implements WidgetInterface
         $link = $this->context->link;
 
         return [
-            'logged'            => $logged,
-            'customerName'        => $customerName,
-            'logout_url'        => $link->getPageLink('index', true, null, 'mylogout'),
-            'my_account_url'    => $link->getPageLink('my-account', true),
+            'logged' => $logged,
+            'customerName' => $customerName,
+            'logout_url' => $link->getPageLink('index', true, null, 'mylogout'),
+            'my_account_url' => $link->getPageLink('my-account', true),
 
         ];
     }
@@ -80,6 +80,6 @@ class Ps_CustomerSignIn extends Module implements WidgetInterface
     public function renderWidget($hookName, array $configuration)
     {
         $this->smarty->assign($this->getWidgetVariables($hookName, $configuration));
-        return $this->display(__FILE__, 'ps_customersignin.tpl');
+        return $this->fetch('module:'.$this->name.'/'.$this->name.'.tpl');
     }
 }
