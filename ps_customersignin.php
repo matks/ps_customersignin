@@ -32,12 +32,13 @@ if (!defined('_PS_VERSION_')) {
 
 class Ps_CustomerSignIn extends Module implements WidgetInterface
 {
+    private $templateFile;
+
     public function __construct()
     {
         $this->name = 'ps_customersignin';
-        $this->tab = 'front_office_features';
-        $this->version = '1.0.2';
         $this->author = 'PrestaShop';
+        $this->version = '1.0.2';
         $this->need_instance = 0;
 
         parent::__construct();
@@ -45,16 +46,14 @@ class Ps_CustomerSignIn extends Module implements WidgetInterface
         $this->displayName = $this->getTranslator()->trans('Customer "Sign in" link', array(), 'Modules.CustomerSignIn');
         $this->description = $this->getTranslator()->trans('Adds a block that displays information about the customer.', array(), 'Modules.CustomerSignIn');
         $this->ps_versions_compliancy = array('min' => '1.7.0.0', 'max' => _PS_VERSION_);
+
+        $this->templateFile = 'module:ps_customersignin/ps_customersignin.tpl';
     }
 
     public function getWidgetVariables($hookName, array $configuration)
     {
-        if (!$this->active) {
-            return;
-        }
-
         $logged = $this->context->customer->isLogged();
-        $customerName = '';
+
         if ($logged) {
             $customerName = $this->getTranslator()->trans(
                 '%firstname% %lastname%',
@@ -64,22 +63,24 @@ class Ps_CustomerSignIn extends Module implements WidgetInterface
                 ),
                 'Modules.CustomerSignIn'
             );
+        } else {
+            $customerName = '';
         }
 
         $link = $this->context->link;
 
-        return [
+        return array(
             'logged' => $logged,
             'customerName' => $customerName,
             'logout_url' => $link->getPageLink('index', true, null, 'mylogout'),
             'my_account_url' => $link->getPageLink('my-account', true),
 
-        ];
+        );
     }
 
     public function renderWidget($hookName, array $configuration)
     {
         $this->smarty->assign($this->getWidgetVariables($hookName, $configuration));
-        return $this->fetch('module:'.$this->name.'/'.$this->name.'.tpl');
+        return $this->fetch($this->templateFile);
     }
 }
