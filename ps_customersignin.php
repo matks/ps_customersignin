@@ -72,9 +72,14 @@ class Ps_CustomerSignIn extends Module implements WidgetInterface
         return array(
             'logged' => $logged,
             'customerName' => $customerName,
+            /*
+            * @deprecated
+            */
             'logout_url' => $link->getPageLink('index', true, null, 'mylogout'),
+            /*
+            * @deprecated
+            */
             'my_account_url' => $link->getPageLink('my-account', true),
-
         );
     }
 
