@@ -2,7 +2,7 @@
 
 ## About
 
-Adds a block that displays information about the customer.
+Make your customers feel at home on your store, invite them to sign in!
 
 ## Reporting issues
 
