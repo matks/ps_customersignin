@@ -44,7 +44,7 @@ class Ps_CustomerSignIn extends Module implements WidgetInterface
         parent::__construct();
 
         $this->displayName = $this->getTranslator()->trans('Customer "Sign in" link', [], 'Modules.Customersignin.Admin');
-        $this->description = $this->getTranslator()->trans('Adds a block that displays information about the customer.', [], 'Modules.Customersignin.Admin');
+        $this->description = $this->getTranslator()->trans('Make your customers feel at home on your store, invite them to sign in!', [], 'Modules.Customersignin.Admin');
         $this->ps_versions_compliancy = ['min' => '1.7.1.0', 'max' => _PS_VERSION_];
 
         $this->templateFile = 'module:ps_customersignin/ps_customersignin.tpl';
